@@ -37,6 +37,7 @@
 		<CheckBoxPreference
 			android:key="confirm_quit"
 			android:title="@string/pref_confirm_quit" />
+		<CheckBoxPreference android:title="@string/pref_left_handed" android:key="left_handed"/>
 			
 	</PreferenceCategory>
 	

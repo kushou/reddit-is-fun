@@ -53,6 +53,7 @@ public class RedditSettings {
 	private boolean useExternalBrowser = false;
 	private boolean showCommentGuideLines = true;
 	private boolean confirmQuit = true;
+	private boolean leftHanded = false;
 	private boolean alwaysShowNextPrevious = true;
 	
 	private int threadDownloadLimit = Constants.DEFAULT_THREAD_DOWNLOAD_LIMIT;
@@ -135,6 +136,9 @@ public class RedditSettings {
     	
     	// Show confirmation dialog when backing out of root Activity
     	editor.putBoolean(Constants.PREF_CONFIRM_QUIT, this.confirmQuit);
+
+    	// Use left handed mode.
+    	editor.putBoolean(Constants.PREF_LEFT_HANDED, this.leftHanded);
     	
     	// Whether to always show the next/previous buttons, or only at bottom of list
     	editor.putBoolean(Constants.PREF_ALWAYS_SHOW_NEXT_PREVIOUS, this.alwaysShowNextPrevious);
@@ -202,6 +206,9 @@ public class RedditSettings {
         
     	// Show confirmation dialog when backing out of root Activity
         this.setConfirmQuit(sessionPrefs.getBoolean(Constants.PREF_CONFIRM_QUIT, true));
+
+        // Use of left handed mode.
+        this.setLeftHanded(sessionPrefs.getBoolean(Constants.PREF_LEFT_HANDED, false));
         
     	// Whether to always show the next/previous buttons, or only at bottom of list
         this.setAlwaysShowNextPrevious(sessionPrefs.getBoolean(Constants.PREF_ALWAYS_SHOW_NEXT_PREVIOUS, true));
@@ -289,6 +296,14 @@ public class RedditSettings {
 
 	public void setConfirmQuit(boolean confirmQuit) {
 		this.confirmQuit = confirmQuit;
+	}
+	
+	public boolean isLeftHanded() {
+		return this.leftHanded;
+	}
+	
+	public void setLeftHanded(boolean leftHanded) {
+		this.leftHanded = leftHanded;
 	}
 
 	public boolean isAlwaysShowNextPrevious() {
