@@ -1829,6 +1829,7 @@ public class CommentsListActivity extends ListActivity
 	    			linkButton.setOnClickListener(new OnClickListener() {
 	    				public void onClick(View v) {
 	    					removeDialog(Constants.DIALOG_COMMENT_CLICK);
+	    					removeDialog(Constants.DIALOG_COMMENT_CLICK_LEFTH);
 	    					// Launch Intent to goto the URL
 	    					Common.launchBrowser(CommentsListActivity.this, url,
 	    							Util.createThreadUri(getOpThingInfo()).toString(),
@@ -1937,7 +1938,8 @@ public class CommentsListActivity extends ListActivity
         	linkButton.setEnabled(true);
         	linkButton.setOnClickListener(new OnClickListener() {
         		public void onClick(View v) {
-        			removeDialog(Constants.DIALOG_COMMENT_CLICK);      
+        			removeDialog(Constants.DIALOG_COMMENT_CLICK);
+        			removeDialog(Constants.DIALOG_COMMENT_CLICK_LEFTH);
         			
     	            ArrayAdapter<MarkdownURL> adapter = 
     	                new ArrayAdapter<MarkdownURL>(CommentsListActivity.this, android.R.layout.select_dialog_item, vtUrls) {
@@ -2062,6 +2064,7 @@ public class CommentsListActivity extends ListActivity
     private final CompoundButton.OnCheckedChangeListener voteUpOnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
     	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 	    	removeDialog(Constants.DIALOG_COMMENT_CLICK);
+	    	removeDialog(Constants.DIALOG_COMMENT_CLICK_LEFTH);
 	    	String thingFullname = mVoteTargetThing.getName();
 			if (isChecked)
 				new VoteTask(thingFullname, 1).execute();
@@ -2072,6 +2075,7 @@ public class CommentsListActivity extends ListActivity
     private final CompoundButton.OnCheckedChangeListener voteDownOnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
 	    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 	    	removeDialog(Constants.DIALOG_COMMENT_CLICK);
+	    	removeDialog(Constants.DIALOG_COMMENT_CLICK_LEFTH);
 	    	String thingFullname = mVoteTargetThing.getName();
 			if (isChecked)
 				new VoteTask(thingFullname, -1).execute();
@@ -2083,6 +2087,7 @@ public class CommentsListActivity extends ListActivity
     private final OnClickListener replyOnClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			removeDialog(Constants.DIALOG_COMMENT_CLICK);
+			removeDialog(Constants.DIALOG_COMMENT_CLICK_LEFTH);
 			showDialog(Constants.DIALOG_REPLY);
 		}
 	};
@@ -2090,6 +2095,7 @@ public class CommentsListActivity extends ListActivity
 	private final OnClickListener loginOnClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			removeDialog(Constants.DIALOG_COMMENT_CLICK);
+			removeDialog(Constants.DIALOG_COMMENT_CLICK_LEFTH);
 			showDialog(Constants.DIALOG_LOGIN);
 		}
 	};

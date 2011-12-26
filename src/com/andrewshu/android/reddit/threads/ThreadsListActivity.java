@@ -1385,6 +1385,7 @@ public final class ThreadsListActivity extends ListActivity {
 			return new OnClickListener() {
 				public void onClick(View v) {
 					removeDialog(Constants.DIALOG_THREAD_CLICK);
+					removeDialog(Constants.DIALOG_THREAD_CLICK_LEFTH);
 					showDialog(Constants.DIALOG_LOGIN);
 				}
 			};
@@ -1395,6 +1396,7 @@ public final class ThreadsListActivity extends ListActivity {
     		return new OnClickListener() {
 				public void onClick(View v) {
 					removeDialog(Constants.DIALOG_THREAD_CLICK);
+					removeDialog(Constants.DIALOG_THREAD_CLICK_LEFTH);
 					// Launch Intent to goto the URL
 					Common.launchBrowser(ThreadsListActivity.this, info.getUrl(),
 							Util.createThreadUri(info).toString(),
@@ -1407,6 +1409,7 @@ public final class ThreadsListActivity extends ListActivity {
 			return new OnClickListener() {
 				public void onClick(View v) {
 					removeDialog(Constants.DIALOG_THREAD_CLICK);
+					removeDialog(Constants.DIALOG_THREAD_CLICK_LEFTH);
 					// Launch an Intent for CommentsListActivity
 					CacheInfo.invalidateCachedThread(ThreadsListActivity.this);
 					Intent i = new Intent(ThreadsListActivity.this, CommentsListActivity.class);
@@ -1423,6 +1426,7 @@ public final class ThreadsListActivity extends ListActivity {
 			return new CompoundButton.OnCheckedChangeListener() {
 		    	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		    		removeDialog(Constants.DIALOG_THREAD_CLICK);
+		    		removeDialog(Constants.DIALOG_THREAD_CLICK_LEFTH);
 			    	if (isChecked) {
 						new MyVoteTask(info, 1, info.getSubreddit()).execute();
 					} else {
@@ -1436,6 +1440,7 @@ public final class ThreadsListActivity extends ListActivity {
 	    	return new CompoundButton.OnCheckedChangeListener() {
 		        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 			    	removeDialog(Constants.DIALOG_THREAD_CLICK);
+			    	removeDialog(Constants.DIALOG_THREAD_CLICK_LEFTH);
 					if (isChecked) {
 						new MyVoteTask(info, -1, info.getSubreddit()).execute();
 					} else {
