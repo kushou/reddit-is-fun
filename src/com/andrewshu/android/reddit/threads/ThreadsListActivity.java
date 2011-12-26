@@ -348,7 +348,10 @@ public final class ThreadsListActivity extends ListActivity {
 
             // Here view may be passed in for re-use, or we make a new one.
             if (convertView == null) {
-                view = mInflater.inflate(R.layout.threads_list_item, null);
+            	if (mSettings.isLeftHanded())
+            		view = mInflater.inflate(R.layout.threads_list_item_lefth, null);
+            	else
+            		view = mInflater.inflate(R.layout.threads_list_item, null);
             } else {
                 view = convertView;
             }
