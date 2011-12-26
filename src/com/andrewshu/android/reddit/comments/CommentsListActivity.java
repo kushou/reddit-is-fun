@@ -557,7 +557,12 @@ public class CommentsListActivity extends ListActivity
         			.execute(Constants.DEFAULT_COMMENT_DOWNLOAD_LIMIT);
         } else {
         	if (!"[deleted]".equals(item.getAuthor()))
-        		showDialog(Constants.DIALOG_COMMENT_CLICK);
+        	{
+        		if (mSettings.isLeftHanded())
+        			showDialog(Constants.DIALOG_COMMENT_CLICK_LEFTH);
+        		else
+        			showDialog(Constants.DIALOG_COMMENT_CLICK);
+        	}
         }
     }
     
@@ -1599,9 +1604,10 @@ public class CommentsListActivity extends ListActivity
 				}
 			};
     		break;
-    		
+    	
+    	case Constants.DIALOG_COMMENT_CLICK_LEFTH:
     	case Constants.DIALOG_COMMENT_CLICK:
-    		dialog = new CommentClickDialog(this, R.style.NoTitleDialog);
+    		dialog = new CommentClickDialog(this, R.style.NoTitleDialog, id == Constants.DIALOG_COMMENT_CLICK_LEFTH);
     		break;
 
     	case Constants.DIALOG_REPLY:
@@ -1792,7 +1798,8 @@ public class CommentsListActivity extends ListActivity
     		final TextView loginPasswordInput = (TextView) dialog.findViewById(R.id.login_password_input);
     		loginPasswordInput.setText("");
     		break;
-    		
+    	
+    	case Constants.DIALOG_COMMENT_CLICK_LEFTH:
     	case Constants.DIALOG_COMMENT_CLICK:
     		if (mVoteTargetThing == null)
     			break;

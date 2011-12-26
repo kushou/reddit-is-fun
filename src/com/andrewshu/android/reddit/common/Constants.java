@@ -102,7 +102,8 @@ public class Constants {
     public static final int DIALOG_SORT_BY_CONTROVERSIAL = 22;
     public static final int DIALOG_SORT_BY_TOP = 23;
     public static final int DIALOG_COMMENT_CLICK = 24;
-    public static final int DIALOG_MESSAGE_CLICK = 25;
+    public static final int DIALOG_COMMENT_CLICK_LEFTH = 25;
+    public static final int DIALOG_MESSAGE_CLICK = 26;
     public static final int DIALOG_GOTO_PARENT = 28;
     public static final int DIALOG_EDIT = 29;
     public static final int DIALOG_DELETE = 30;

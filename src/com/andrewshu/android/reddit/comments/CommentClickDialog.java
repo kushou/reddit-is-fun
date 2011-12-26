@@ -9,32 +9,24 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 
 import com.andrewshu.android.reddit.R;
-import com.andrewshu.android.reddit.settings.RedditSettings;;
 
 public class CommentClickDialog extends Dialog {
 
-	private Context mContext = null;
-	private RedditSettings mSettings = null;
+	private int layout;
 	
-	public CommentClickDialog(Context context, int theme) {
+	public CommentClickDialog(Context context, int theme, boolean leftHanded) {
 		super(context, theme);
-		this.mContext = context;
+
+		if (leftHanded) this.layout = R.layout.comment_click_dialog_lefth;
+		else this.layout = R.layout.comment_click_dialog;
 	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		if (mSettings == null)
-		{
-			mSettings = new RedditSettings();
-			mSettings.loadRedditPreferences(this.mContext, null);
-		}
-		
-		if (!mSettings.isLeftHanded())
-			setContentView(R.layout.comment_click_dialog);
-		else
-			setContentView(R.layout.comment_click_dialog_lefth);
+	
+		setContentView(this.layout);
 
 		Display display = ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 
@@ -44,5 +36,4 @@ public class CommentClickDialog extends Dialog {
 			params.height = LayoutParams.FILL_PARENT;
 		getWindow().setAttributes((android.view.WindowManager.LayoutParams) params); 
 	}
-
 }
