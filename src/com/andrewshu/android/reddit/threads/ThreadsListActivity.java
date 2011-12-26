@@ -608,7 +608,8 @@ public final class ThreadsListActivity extends ListActivity {
     	mVoteTargetThing = item;
     	mJumpToThreadId = item.getId();
     	
-    	showDialog(Constants.DIALOG_THREAD_CLICK);
+    	if (mSettings.isLeftHanded()) showDialog(Constants.DIALOG_THREAD_CLICK_LEFTH);
+    	else showDialog(Constants.DIALOG_THREAD_CLICK);
     }
 
     /**
@@ -1182,9 +1183,10 @@ public final class ThreadsListActivity extends ListActivity {
 				}
 			};
     		break;
-    		
+    	
+    	case Constants.DIALOG_THREAD_CLICK_LEFTH:
     	case Constants.DIALOG_THREAD_CLICK:
-    		dialog = new ThreadClickDialog(this, R.style.NoTitleDialog);
+    		dialog = new ThreadClickDialog(this, R.style.NoTitleDialog, id == Constants.DIALOG_THREAD_CLICK_LEFTH);
     		break;
     		
     	case Constants.DIALOG_SORT_BY:
@@ -1245,6 +1247,7 @@ public final class ThreadsListActivity extends ListActivity {
     		loginPasswordInput.setText("");
     		break;
     		
+    	case Constants.DIALOG_THREAD_CLICK_LEFTH:
     	case Constants.DIALOG_THREAD_CLICK:
     		if (mVoteTargetThing == null)
     			break;

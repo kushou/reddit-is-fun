@@ -1083,9 +1083,10 @@ public final class ProfileActivity extends ListActivity
 				}
     		});
     		break;
-    		
+ 
+    	case Constants.DIALOG_COMMENT_CLICK_LEFTH:
     	case Constants.DIALOG_THREAD_CLICK:
-    		dialog = new ThreadClickDialog(this, R.style.NoTitleDialog);
+    		dialog = new ThreadClickDialog(this, R.style.NoTitleDialog, id == Constants.DIALOG_THREAD_CLICK_LEFTH);
 			break;
     		
    		// "Please wait"

@@ -12,15 +12,20 @@ import com.andrewshu.android.reddit.R;
 
 public class ThreadClickDialog extends Dialog {
 
-	public ThreadClickDialog(Context context, int theme) {
+	private int layout;
+	
+	public ThreadClickDialog(Context context, int theme, boolean leftHanded) {
 		super(context, theme);
+		
+		if (leftHanded) this.layout = R.layout.thread_click_dialog_lefth;
+		else this.layout = R.layout.thread_click_dialog;
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.thread_click_dialog);
+		setContentView(this.layout);
 
 		Display display = ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 
