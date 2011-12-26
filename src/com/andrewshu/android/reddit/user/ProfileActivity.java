@@ -363,7 +363,8 @@ public final class ProfileActivity extends ListActivity
         mVoteTargetView = v;
         
 		if (item.getName().startsWith(Constants.THREAD_KIND)) {
-			showDialog(Constants.DIALOG_THREAD_CLICK);
+			if (mSettings.isLeftHanded()) showDialog(Constants.DIALOG_THREAD_CLICK_LEFTH);
+			else showDialog(Constants.DIALOG_THREAD_CLICK);
 		} else {
 			openContextMenu(v);
 		}
@@ -400,6 +401,7 @@ public final class ProfileActivity extends ListActivity
 			i.putExtra(Constants.EXTRA_TITLE, mVoteTargetThingInfo.getTitle());
 			startActivity(i);
 			return true;
+    	case Constants.DIALOG_THREAD_CLICK_LEFTH:
     	case Constants.DIALOG_THREAD_CLICK:
 			// Launch an Intent for CommentsListActivity
 			CacheInfo.invalidateCachedThread(getApplicationContext());
@@ -1087,7 +1089,7 @@ public final class ProfileActivity extends ListActivity
     		});
     		break;
  
-    	case Constants.DIALOG_COMMENT_CLICK_LEFTH:
+    	case Constants.DIALOG_THREAD_CLICK_LEFTH:
     	case Constants.DIALOG_THREAD_CLICK:
     		dialog = new ThreadClickDialog(this, R.style.NoTitleDialog, id == Constants.DIALOG_THREAD_CLICK_LEFTH);
 			break;
@@ -1140,7 +1142,8 @@ public final class ProfileActivity extends ListActivity
     		composeDestination.setText(mUsername);
     		new MyCaptchaCheckRequiredTask(dialog).execute();
     		break;
-    		
+    	
+    	case Constants.DIALOG_THREAD_CLICK_LEFTH:
     	case Constants.DIALOG_THREAD_CLICK:
     		ThreadsListActivity.fillThreadClickDialog(dialog, mVoteTargetThingInfo, mSettings,
     				threadClickDialogOnClickListenerFactory);
@@ -1185,6 +1188,7 @@ public final class ProfileActivity extends ListActivity
 			return new OnClickListener() {
 				public void onClick(View v) {
 					removeDialog(Constants.DIALOG_THREAD_CLICK);
+					removeDialog(Constants.DIALOG_THREAD_CLICK_LEFTH);
 					showDialog(Constants.DIALOG_LOGIN);
 				}
 			};
@@ -1195,6 +1199,7 @@ public final class ProfileActivity extends ListActivity
 			return new OnClickListener() {
 				public void onClick(View v) {
 					removeDialog(Constants.DIALOG_THREAD_CLICK);
+					removeDialog(Constants.DIALOG_THREAD_CLICK_LEFTH);
 					// Launch Intent to goto the URL
 					Common.launchBrowser(ProfileActivity.this, info.getUrl(),
 							Util.createThreadUri(info).toString(),
@@ -1207,6 +1212,7 @@ public final class ProfileActivity extends ListActivity
 			return new OnClickListener() {
 				public void onClick(View v) {
 					removeDialog(Constants.DIALOG_THREAD_CLICK);
+					removeDialog(Constants.DIALOG_THREAD_CLICK_LEFTH);
 					// Launch an Intent for CommentsListActivity
 					CacheInfo.invalidateCachedThread(ProfileActivity.this);
 					Intent i = new Intent(ProfileActivity.this, CommentsListActivity.class);
@@ -1223,6 +1229,7 @@ public final class ProfileActivity extends ListActivity
 			return new CompoundButton.OnCheckedChangeListener() {
 		    	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		    		removeDialog(Constants.DIALOG_THREAD_CLICK);
+		    		removeDialog(Constants.DIALOG_COMMENT_CLICK_LEFTH);
 			    	if (isChecked) {
 						new MyVoteTask(info, 1, info.getSubreddit()).execute();
 					} else {
@@ -1236,6 +1243,7 @@ public final class ProfileActivity extends ListActivity
 			return new CompoundButton.OnCheckedChangeListener() {
 		        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 			    	removeDialog(Constants.DIALOG_THREAD_CLICK);
+			    	removeDialog(Constants.DIALOG_THREAD_CLICK_LEFTH);
 					if (isChecked) {
 						new MyVoteTask(info, -1, info.getSubreddit()).execute();
 					} else {
